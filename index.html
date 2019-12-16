@@ -1,0 +1,692 @@
+<html>
+<head>
+	<title>Sorting Algorithms</title>
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Sorts+Mill+Goudy" rel="stylesheet">
+	<style>
+	input[type=text]{
+		width: 4%;
+		padding: 5px 5px;
+		margin: 10px 1px;
+		box-sizing: border-box;
+		font-size: 20px;
+		text-align: center;
+	}
+
+	input[type=text]:focus{
+		border: 2px solid #555;
+	}
+
+	button {
+		background-color: #ABBBFF;
+		border: none;
+		color: white;
+		padding: 15px;
+		text-align: center;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 12px;
+	}
+
+	select{
+		width: 20%;
+		padding: 16px 16px;
+		border: none;
+		border-radius: 4px;
+		background-color: #f1f1f1;
+		margin: 4px 5px;
+	}
+
+	.array{
+		width: 5%;
+		background-color: #f1f1f1;
+		border: 1px solid black;
+		padding: 15px;
+		text-align: center;
+		display: inline-block;
+		font-size: 20px;
+		margin: 2px 2px;
+		border-radius: 12px;
+	}
+
+	#label{
+		font-family: 'Raleway', sans-serif;
+		font-size: 20px;
+		text-align: center;
+		padding: 5px;
+		color: #ABBBFF;
+	}
+
+	#title{
+		font-family: 'Raleway', sans-serif;
+		font-size: 25px;
+		text-align: center;
+		padding: 20px;
+		color: #ABBBFF;
+	}
+
+	#sort{
+		font-family: 'Raleway', sans-serif;
+		font-size: 23px;
+		text-align: center;
+		padding: 10px;
+		color: #ABBBFF;
+	}
+
+	#link{
+		font-family: 'Raleway', sans-serif;
+		font-size: 10px;
+		text-align: center;
+		padding: 5px;
+
+	}
+	#heading{
+		font-family: 'Sorts Mill Goudy', serif;
+		font-size: 45px;
+		text-align: center;
+		padding: 100px;
+	}
+	body{
+		text-align:center;
+	}
+</style>
+</head>
+<body>
+	<br>
+	<label id="heading">Sorting Algorithms</label><br>
+	<div>
+		<label id="label">Enter Numbers to Sort:</label><br>
+		<input class="inputs" type="text" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="num1" />
+		<input class="inputs" type="text" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="num2" />
+		<input class="inputs" type="text" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="num3" />
+		<input class="inputs" type="text" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="num4" />
+		<input class="inputs" type="text" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="num5" />
+		<input class="inputs" type="text" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="num6" />
+		<input class="inputs" type="text" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="num7" />
+		<input class="inputs" type="text" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="num8" />
+		<input class="inputs" type="text" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="num9" />
+		<input class="inputs" type="text" maxlength="3" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="num10" /><br>
+		<select id = "select">
+			<option value="1">Bubble Sort</option>
+			<option value="2">Heap Sort</option>
+			<option value="3">Insertion Sort</option>
+			<option value="4">Merge Sort</option>
+			<option value="5">Quick Sort</option>
+			<option value="6">Selection Sort</option>
+		</select>
+		<button type="button" onclick="sort2()">Sort</button><br>
+	</div>
+	<div id="visual">
+		<p id="sort"></p>
+		<p class="array" id="0"></p>
+		<p class="array" id="1"></p>
+		<p class="array" id="2"></p>
+		<p class="array" id="3"></p>
+		<p class="array" id="4"></p>
+		<p class="array" id="5"></p>
+		<p class="array" id="6"></p>
+		<p class="array" id="7"></p>
+		<p class="array" id="8"></p>
+		<p class="array" id="9"></p>
+	</div>
+	<script>
+	document.getElementById("visual").style.visibility = "hidden";
+	var delay = 1000; //1 second
+
+	function sort2(){
+		var option = document.getElementById("select");
+		var sort = option.options[option.selectedIndex].value;
+
+		var n0 = document.getElementById("num1").value;
+		var n1 = document.getElementById("num2").value;
+		var n2 = document.getElementById("num3").value;
+		var n3 = document.getElementById("num4").value;
+		var n4 = document.getElementById("num5").value;
+		var n5 = document.getElementById("num6").value;
+		var n6 = document.getElementById("num7").value;
+		var n7 = document.getElementById("num8").value;
+		var n8 = document.getElementById("num9").value;
+		var n9 = document.getElementById("num10").value;
+
+		document.getElementById("0").innerHTML = n0;
+		document.getElementById("1").innerHTML = n1;
+		document.getElementById("2").innerHTML = n2;
+		document.getElementById("3").innerHTML = n3;
+		document.getElementById("4").innerHTML = n4;
+		document.getElementById("5").innerHTML = n5;
+		document.getElementById("6").innerHTML = n6;
+		document.getElementById("7").innerHTML = n7;
+		document.getElementById("8").innerHTML = n8;
+		document.getElementById("9").innerHTML = n9;
+
+		var arr = [parseInt(n0), parseInt(n1), parseInt(n2), parseInt(n3), parseInt(n4), parseInt(n5), parseInt(n6), parseInt(n7), parseInt(n8), parseInt(n9)];
+
+		if(sort == "1"){
+			bubbleSort(arr);
+		}
+		else if(sort == "2"){
+			document.getElementById("sort").innerHTML = "Heap Sort";
+			document.getElementById("visual").style.visibility = "visible";
+			heapSort(arr);
+		}
+		else if(sort == "3"){
+			document.getElementById("sort").innerHTML = "Insertion Sort";
+			document.getElementById("visual").style.visibility = "visible";
+			insertionSort(arr);
+		}
+		else if(sort == "4"){
+			document.getElementById("sort").innerHTML = "Merge Sort";
+			document.getElementById("visual").style.visibility = "visible";
+			mergeSort(arr, 0, 9);
+		}
+		else if(sort == "5"){
+			document.getElementById("sort").innerHTML = "Quick Sort";
+			document.getElementById("visual").style.visibility = "visible";
+			quickSort(arr, 0, 9);
+		}
+		else if(sort == "6"){
+			document.getElementById("sort").innerHTML = "Selection Sort";
+			document.getElementById("visual").style.visibility = "visible";
+			selectionSort(arr);
+		}
+	}
+
+	function bubbleSort(arr){
+		document.getElementById("sort").innerHTML = "Bubble Sort";
+		document.getElementById("visual").style.visibility = "visible";
+
+		function loop(count, callback, done) {
+			var counter = 0;
+			var next = function () {
+				setTimeout(iteration, delay*4);
+			};
+			var iteration = function () {
+				if (counter < count) {
+					callback(counter, next);
+				} else {
+					done && done();
+				}
+				counter++;
+			}
+			iteration();
+		}
+
+		loop(arr.length, function (i, next) {
+			next();
+		});
+
+		loop(arr.length, function (i, nextI) {
+			loop(arr.length-i-1, function (j, nextJ) {
+				highlight(j,j+1);
+				if(arr[j] > arr[j+1]) {
+					var temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+					swap2(j, j+1);
+				}
+				clear2(j,j+1);
+				nextJ();
+			}, nextI);
+		});
+
+	}
+
+	function highlight(i, j){
+		setTimeout(`document.getElementById(${i}).style.background = "#ABBBFF";`, delay);
+		setTimeout(`document.getElementById(${j}).style.background = "#ABBBFF";`, delay);
+	}
+
+	function clear2(i, j){
+		setTimeout(`document.getElementById(${i}).style.background = "#f1f1f1";`, delay*4);
+		setTimeout(`document.getElementById(${j}).style.background = "#f1f1f1";`, delay*4);
+	}
+
+	function swap2(i, j){
+		var temp1 = document.getElementById(i).innerHTML;
+		var temp2 = document.getElementById(j).innerHTML;
+		setTimeout(`document.getElementById(${i}).style.background = "pink";`, delay*2);
+		setTimeout(`document.getElementById(${j}).style.background = "pink";`, delay*2);
+		setTimeout(`document.getElementById(${i}).innerHTML = ${temp2};
+		document.getElementById(${j}).innerHTML = ${temp1};`, delay*3);
+	}
+	//////////////////////////////////////////////////////QuickSort
+	let values = [];
+	let states = [];
+
+	async function quickSort(arr, start, end) {
+		await sleep(1000);
+		values = arr;
+		for(let i = 0; i < values.length; i++) {
+			states[i] = -1;
+		}
+
+		if(start >= end) {
+			return;
+		}
+		let index = await partition(arr, start, end);
+		states[index] = -1;
+
+		//each function should invoke simultaneously
+		await Promise.all([await quickSort(arr, start, index-1),
+			await quickSort(arr, index+1, end)]);
+		}
+
+		async function partition(arr, start, end) {
+			for(let i = start; i< end; i++) {
+				document.getElementById(`${i}`).style.background = "#C0C0C0";
+				states[i] = 1;
+			}
+
+			let pivotIndex = start;
+			let pivotValue = arr[end];
+			states[pivotIndex] = 0;
+			document.getElementById(`${end}`).style.background = "yellow";
+			await sleep(1000);
+			for(let i = start; i < end; i++) {
+				document.getElementById(`${i}`).style.background = "#ABBBFF";
+				document.getElementById(`${pivotIndex}`).style.background = "#ABBBFF";
+				await sleep(1000);
+				if(arr[i]<pivotValue) {
+					await swap(arr, i, pivotIndex);
+					states[pivotIndex] = -1;
+					document.getElementById(`${pivotIndex}`).style.background = "#f1f1f1";
+					pivotIndex++;
+					states[pivotIndex] = 0;
+				}
+				document.getElementById(`${i}`).style.background = "#f1f1f1";
+				document.getElementById(`${pivotIndex}`).style.background = "#f1f1f1";
+				await sleep(1000);
+			}
+
+			document.getElementById(`${end}`).style.background = "#ABBBFF";
+			document.getElementById(`${pivotIndex}`).style.background = "#ABBBFF";
+			await sleep(1000);
+			await lastswap(arr, pivotIndex, end);
+			document.getElementById(`${end}`).style.background = "#f1f1f1";
+			document.getElementById(`${pivotIndex}`).style.background = "#f1f1f1";
+
+			for(let i = start; i < end; i++) {
+				states[i] = -1;
+			}
+
+			return pivotIndex;
+		}
+
+		async function swap(arr, a, b) {
+			// Call to sleep function
+			document.getElementById(`${a}`).style.background = "pink";
+			document.getElementById(`${b}`).style.background = "pink";
+			await sleep(1000);
+			let t = arr[a];
+			document.getElementById(`${a}`).innerHTML = arr[b];
+			document.getElementById(`${b}`).innerHTML = t;
+			arr[a] = arr[b];
+			arr[b] = t;
+			await sleep(1000);
+		}
+		async function lastswap(arr, a, b) {
+			// Call to sleep function
+			document.getElementById(`${a}`).style.background = "pink";
+			document.getElementById(`${b}`).style.background = "pink";
+			await sleep(1000);
+			let t = arr[a];
+			document.getElementById(`${a}`).innerHTML = arr[b];
+			document.getElementById(`${b}`).innerHTML = t;
+			document.getElementById(`${b}`).style.border = "1px solid black";
+			arr[a] = arr[b];
+			arr[b] = t;
+			await sleep(1000);
+		}
+
+		// Definition of sleep function
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+
+		//////////////////////// Selection Sort
+
+		async	function swapSel(arr, i, j) {
+			document.getElementById(`${i}`).style.background = "pink";
+			document.getElementById(`${j}`).style.background = "pink";
+			await sleep(1000);
+			let temp = arr[i];
+			document.getElementById(`${i}`).innerHTML = arr[j];
+			document.getElementById(`${j}`).innerHTML = temp;
+			document.getElementById(`${i}`).style.border = "3px solid blue";
+			document.getElementById(`${j}`).style.borderColor = "black";
+			document.getElementById(`${j}`).style.borderWidth = "1px";
+			arr[i] = arr[j];
+			arr[j] = temp;
+			await sleep(1000);
+		}
+
+		async function selectionSort(arr) {
+			await clear(arr);
+			//initiate variables
+			var len = arr.length;
+			var min, i, j;
+
+			//master for loop to keep track of array to be sorted
+			for (i = 0; i < len; i++) {
+				min = i; //set min to first of unsorted elements
+				document.getElementById(`${min}`).style.border = "3px solid blue"; //make min red
+				await sleep(1000);
+
+				//iterate through rest of array to find min
+				for (j = i + 1; j < len; j++) {
+					//compare j and min; make j and min green
+					document.getElementById(`${j}`).style.background = "#ABBBFF";
+					document.getElementById(`${min}`).style.background = "#ABBBFF";
+					await sleep(1000);
+					if  (arr[j] < arr[min]) {
+						//make new min (j) red border, make old min white
+						document.getElementById(`${j}`).style.border = "3px solid blue";
+						//document.getElementById(`${j}`).style.background = "#f1f1f1";
+						document.getElementById(`${min}`).style.background = "#f1f1f1";
+						document.getElementById(`${min}`).style.border = "1px solid black";
+						await sleep(1000);
+						min = j;
+					}
+					else {
+						//keep min as is; make min green and j white
+						//document.getElementById(`${min}`).style.border = "#2px solid blue";
+						document.getElementById(`${min}`).style.border = "3px solid blue";
+						//document.getElementById(`${min}`).style.borderColor = "red";
+						document.getElementById(`${j}`).style.background = "#f1f1f1";
+						await sleep(1000);
+					}
+				}
+				//if minimum isn't first element, swap
+				if (i != min) {
+					await swapSel(arr, i, min);
+				}
+				//document.getElementById(`${i}`).style.background = "#f1f1f1";
+				document.getElementById(`${min}`).style.background = "#f1f1f1";
+				//document.getElementById(`${i}`).style.border = "#1px solid black";
+				document.getElementById(`${i}`).style.borderColor = "black";
+				document.getElementById(`${i}`).style.borderWidth = "1px";
+				document.getElementById(`${i}`).style.background = "#C0C0C0";
+				//document.getElementById(`${i}`).style.border = "#1px solid black";
+				await sleep(1000);
+			}
+
+		}
+
+		////////////////////////////////Heap Sort
+		var array_length;
+		/* to create MAX  array */
+		async function heap_root(input, i) {
+			var left = 2 * i + 1;
+			var right = 2 * i + 2;
+			var max = i;
+
+			if (left < array_length) {
+				document.getElementById(`${i}`).style.borderColor = "red"; //make border of family red
+				document.getElementById(`${i}`).style.borderWidth = "2px";
+				document.getElementById(`${left}`).style.borderColor = "red";
+				document.getElementById(`${left}`).style.borderWidth = "2px";
+				if (right < array_length) {
+					document.getElementById(`${right}`).style.borderColor = "red";
+					document.getElementById(`${right}`).style.borderWidth = "2px";
+				}
+				document.getElementById(`${max}`).style.borderWidth = "3px";
+				await sleep(1000);
+
+				//compare max and left
+				document.getElementById(`${max}`).style.background = "#ABBBFF"; //compare elements background blue
+				document.getElementById(`${left}`).style.background = "#ABBBFF";
+				await sleep(1000);
+
+				if (input[left] > input[max]) {
+					//switch max
+					document.getElementById(`${left}`).style.borderWidth = "3px";
+					document.getElementById(`${max}`).style.borderWidth = "2px";
+					document.getElementById(`${max}`).style.background = "#f1f1f1";
+					await sleep(1000);
+					max = left;
+				}
+				else {
+					document.getElementById(`${left}`).style.background = "#f1f1f1";
+					await sleep(1000);
+				}
+			}
+
+			if (right < array_length) {
+
+				//compare max and right
+				document.getElementById(`${max}`).style.background = "#ABBBFF"; //compare elements background blue
+				document.getElementById(`${right}`).style.background = "#ABBBFF";
+				await sleep(1000);
+
+				if (right < array_length && input[right] > input[max]) {
+					//switch max
+					document.getElementById(`${right}`).style.borderWidth = "3px";
+					document.getElementById(`${max}`).style.borderWidth = "2px";
+					document.getElementById(`${max}`).style.background = "#f1f1f1";
+					await sleep(1000);
+					max = right;
+				}
+				//compare and switch max
+				else {
+					document.getElementById(`${right}`).style.background = "#f1f1f1";
+					await sleep(1000);
+				}
+			}
+			document.getElementById(`${max}`).style.borderWidth = "3px";
+			document.getElementById(`${max}`).style.background = "#f1f1f1";
+
+			if (max != i) {
+				await swapHeapMax(input, i, max); //make max the parent
+				document.getElementById(`${i}`).style.borderColor = "black"; //make border of family red
+				document.getElementById(`${max}`).style.borderColor = "black";
+				document.getElementById(`${left}`).style.borderColor = "black";
+				document.getElementById(`${i}`).style.background = "#f1f1f1";
+				document.getElementById(`${left}`).style.background = "#f1f1f1";
+				document.getElementById(`${max}`).style.background = "#f1f1f1";
+				if (right < array_length) {
+					document.getElementById(`${right}`).style.borderColor = "black";
+					document.getElementById(`${right}`).style.borderWidth = "1px";
+					document.getElementById(`${right}`).style.background = "#f1f1f1";
+				}
+				document.getElementById(`${i}`).style.borderWidth = "1px";
+				document.getElementById(`${left}`).style.borderWidth = "1px";
+				document.getElementById(`${max}`).style.borderWidth = "1px";
+				await sleep(1000);
+				await Promise.all([await heap_root(input, max)]);
+
+			}
+			else {
+				document.getElementById(`${i}`).style.borderColor = "black"; //make border of family red
+				document.getElementById(`${max}`).style.borderColor = "black";
+				document.getElementById(`${i}`).style.background = "#f1f1f1";
+				document.getElementById(`${max}`).style.background = "#f1f1f1";
+				document.getElementById(`${i}`).style.borderWidth = "1px";
+				document.getElementById(`${max}`).style.borderWidth = "1px";
+				if (right < array_length){
+					document.getElementById(`${right}`).style.borderColor = "black";
+					document.getElementById(`${right}`).style.background = "#f1f1f1";
+					document.getElementById(`${right}`).style.borderWidth = "1px";
+				}
+				if (left < array_length) {
+					document.getElementById(`${left}`).style.borderColor = "black";
+					document.getElementById(`${left}`).style.background = "#f1f1f1";
+					document.getElementById(`${left}`).style.borderWidth = "1px";
+				}
+			}
+			document.getElementById(`${max}`).style.borderWidth = "1px";
+		}
+
+		async function swapHeap(arr, index_A, index_B) {
+			document.getElementById(`${index_A}`).style.background = "pink";
+			document.getElementById(`${index_B}`).style.background = "pink";
+			await sleep(1000);
+			var temp = arr[index_A];
+
+			document.getElementById(`${index_A}`).innerHTML = arr[index_B];
+			document.getElementById(`${index_B}`).innerHTML = temp;
+			await sleep(1000);
+			arr[index_A] = arr[index_B];
+			arr[index_B] = temp;
+			document.getElementById(`${index_A}`).style.background = "#f1f1f1";
+			document.getElementById(`${index_B}`).style.background = "#f1f1f1";
+		}
+
+		async function swapHeapMax(arr, index_A, index_B) {
+			document.getElementById(`${index_A}`).style.background = "pink";
+			document.getElementById(`${index_B}`).style.background = "pink";
+			await sleep(1000);
+			var temp = arr[index_A];
+
+			document.getElementById(`${index_A}`).innerHTML = arr[index_B];
+			document.getElementById(`${index_B}`).innerHTML = temp;
+			arr[index_A] = arr[index_B];
+			arr[index_B] = temp;
+			document.getElementById(`${index_A}`).style.borderWidth = "3px";
+			document.getElementById(`${index_B}`).style.borderWidth = "2px";
+			await sleep(1000);
+			document.getElementById(`${index_A}`).style.background = "#f1f1f1";
+			document.getElementById(`${index_B}`).style.background = "#f1f1f1";
+			document.getElementById(`${index_A}`).style.borderWidth = "1px";
+		}
+
+		async function heapSort(input) {
+			await clear(input);
+			array_length = input.length;
+
+			for (var i = Math.floor(array_length / 2); i >= 0; i -= 1)      {
+				await heap_root(input, i);
+			}
+
+			for (i = input.length - 1; i > 0; i--) {
+				await swapHeap(input, 0, i);
+				document.getElementById(`${array_length-1}`).style.background = "#C0C0C0";
+				array_length--;
+
+
+				await heap_root(input, 0);
+				document.getElementById(`${0}`).style.background = "#C0C0C0";
+
+			}
+		}
+
+		async function clear(arr) {
+			var i;
+			for (i = 0; i < 10; i+=1) {
+				document.getElementById(`${i}`).style.background = "#f1f1f1";
+				document.getElementById(`${i}`).style.borderColor = "black";
+				document.getElementById(`${i}`).style.borderWidth = "1px";
+			}
+		}
+
+		//////////////////////// Insertion Sort
+
+		async function insertionSort(arr){
+			document.getElementById("sort").innerHTML = "Insertion Sort";
+			document.getElementById("visual").style.visibility = "visible";
+
+			var len = arr.length;
+
+			for (i = 0; i < len; i++) {
+				var key = arr[i];
+
+				await sleep(1000);
+
+				var j = i;
+
+				while (j > 0 && key < arr[j-1]) {
+
+					document.getElementById(`${j}`).style.background = "#ABBBFF";
+
+					await sleep(1000);
+					swapIns(arr, j, j-1);
+					//arr[j] = arr[j-1] happens inside swapIns;
+					j = j - 1;
+					await sleep(1000);
+				}
+			document.getElementById(`${j}`).style.background = "#C0C0C0";
+			document.getElementById(`${j}`).style.borderColor = "black";
+			document.getElementById(`${j}`).style.borderWidth = "1px";
+			arr[j] = key;
+
+			document.getElementById(`${j}`).style.background = "#C0C0C0";
+			document.getElementById(`${j}`).style.borderColor = "black";
+			document.getElementById(`${j}`).style.borderWidth = "1px";
+
+			}
+		}
+
+		async	function swapIns(arr, i, j) {
+			document.getElementById(`${i}`).style.background = "pink";
+			document.getElementById(`${j}`).style.background = "pink";
+			await sleep(1000);
+			let temp = arr[i];
+			document.getElementById(`${i}`).innerHTML = arr[j];
+			document.getElementById(`${j}`).innerHTML = temp;
+
+			arr[i] = arr[j];
+
+			arr[j] = temp;
+			document.getElementById(`${i}`).style.background = "#C0C0C0";
+			document.getElementById(`${j}`).style.background = "#C0C0C0";
+
+			await sleep(1000);
+		}
+
+		/////////////////////////Merge Sort
+		async function merge(arr, start, mid, end){
+			var start2 = mid + 1;
+			// If the direct merge is already sorted
+			if (arr[mid] <= arr[start2]) {
+				return;
+			}
+
+			// Two pointers to maintain start
+			// of both arrays to merge
+			while(start <= mid && start2 <= end) {
+				// If element 1 is in right place
+				if (arr[start] <= arr[start2]) {
+					start = start + 1;
+				}
+				else {
+					var value = arr[start2];
+					var index = start2;
+
+					// Shift all the elements between element 1
+					// element 2, right by 1.
+					while(index != start) {
+						arr[index] = arr[index - 1];
+						index = index - 1;
+					}
+					arr[start] = value;
+
+					// Update all the pointers
+					start = start + 1;
+					mid = mid + 1;
+					start2 = start2 + 1;
+				}
+			}
+		}
+
+		/* l is for left index and r is right index of the
+		sub-array of arr to be sorted */
+		async function mergeSort(arr, l, r){
+			if (l < r) {
+				// Same as (l + r) / 2, but avoids overflow
+				// for large l and r
+				var m = Math.floor((l+r)/2);
+
+				// Sort first and second halves
+				await Promise.all([await mergeSort(arr, l, m)]);
+				await Promise.all([await mergeSort(arr, m + 1, r)]);
+
+				await merge(arr, l, m, r);
+
+				console.log(arr);
+			}
+		}
+
+		</script>
+	</body>
+	</html>
