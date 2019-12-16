@@ -636,7 +636,11 @@
 
 		/////////////////////////Merge Sort
 		async function merge(arr, start, mid, end){
+
 			var start2 = mid + 1;
+
+			document.getElementById(`${mid}`).style.border = "2px blue";
+
 			// If the direct merge is already sorted
 			if (arr[mid] <= arr[start2]) {
 				return;
@@ -646,6 +650,7 @@
 			// of both arrays to merge
 			while(start <= mid && start2 <= end) {
 				// If element 1 is in right place
+
 				if (arr[start] <= arr[start2]) {
 					start = start + 1;
 				}
@@ -653,11 +658,17 @@
 					var value = arr[start2];
 					var index = start2;
 
+					await sleep(1000);
+					
 					// Shift all the elements between element 1
 					// element 2, right by 1.
 					while(index != start) {
+						document.getElementById(`${index}`).style.border = "pink";
+						document.getElementById(`${index-1}`).style.border = "pink";
 						arr[index] = arr[index - 1];
 						index = index - 1;
+						document.getElementById(`${index}`).style.border = "#C0C0C0";
+						document.getElementById(`${index-1}`).style.border = "#C0C0C0";
 					}
 					arr[start] = value;
 
@@ -667,6 +678,7 @@
 					start2 = start2 + 1;
 				}
 			}
+			console.log(arr);
 		}
 
 		/* l is for left index and r is right index of the
@@ -686,6 +698,24 @@
 				console.log(arr);
 			}
 		}
+
+		async	function swapIns(arr, i, j) {
+			document.getElementById(`${i}`).style.background = "pink";
+			document.getElementById(`${j}`).style.background = "pink";
+			await sleep(1000);
+			let temp = arr[i];
+			document.getElementById(`${i}`).innerHTML = arr[j];
+			document.getElementById(`${j}`).innerHTML = temp;
+
+			arr[i] = arr[j];
+
+			arr[j] = temp;
+			document.getElementById(`${i}`).style.background = "#C0C0C0";
+			document.getElementById(`${j}`).style.background = "#C0C0C0";
+
+			await sleep(1000);
+		}
+
 
 		</script>
 	</body>
