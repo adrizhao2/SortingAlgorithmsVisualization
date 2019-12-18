@@ -659,16 +659,15 @@
 					var index = start2;
 
 					await sleep(1000);
-					
+
 					// Shift all the elements between element 1
 					// element 2, right by 1.
 					while(index != start) {
-						document.getElementById(`${index}`).style.border = "pink";
-						document.getElementById(`${index-1}`).style.border = "pink";
+
 						arr[index] = arr[index - 1];
 						index = index - 1;
-						document.getElementById(`${index}`).style.border = "#C0C0C0";
-						document.getElementById(`${index-1}`).style.border = "#C0C0C0";
+						//document.getElementById(`${index}`).style.border = "#C0C0C0";
+
 					}
 					arr[start] = value;
 
@@ -678,7 +677,8 @@
 					start2 = start2 + 1;
 				}
 			}
-			console.log(arr);
+
+		console.log(arr);
 		}
 
 		/* l is for left index and r is right index of the
@@ -691,15 +691,32 @@
 
 				// Sort first and second halves
 				await Promise.all([await mergeSort(arr, l, m)]);
+				await sleep(1000);
 				await Promise.all([await mergeSort(arr, m + 1, r)]);
+				await sleep(1000);
 
 				await merge(arr, l, m, r);
 
 				console.log(arr);
 			}
+
+
+			for(let i =0;i<arr.length;i++){
+				document.getElementById(`${i}`).style.background = "#C0C0C0";
+			}
+			for(let i = l;i<=r;i++){
+				if(r==i&&i==l){// try this version and also try removing r==1. see which u like most.
+					document.getElementById(`${i}`).style.background = "red";
+					document.getElementById(`${i}`).innerHTML = arr[i];
+				}
+				else{
+				document.getElementById(`${i}`).style.background = "pink";
+				document.getElementById(`${i}`).innerHTML = arr[i];
+			}
+		}
 		}
 
-		async	function swapIns(arr, i, j) {
+		async	function swapMerge(arr, i, j) {
 			document.getElementById(`${i}`).style.background = "pink";
 			document.getElementById(`${j}`).style.background = "pink";
 			await sleep(1000);
